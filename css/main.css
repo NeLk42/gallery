@@ -202,6 +202,10 @@ h1, h2 {
   color: #fff;
 }
 
+h3 {
+  color: #a3a3a3;
+}
+
 nav a, nav a:visited {
   color: #fff;
 }
