@@ -12,9 +12,52 @@
         <link rel="stylesheet" href="css/main.css">
 
 	</head>
-	<body ng-app="img-gallery">
+	<body ng-app="img-gallery" ng-controller="MainController">
+        <header>
+            <a href="index.html" id="logo">
+                <h1>My Fancy French Image Gallery</h1>
+                <h2>Image Gallery</h2>
+            </a>
 
-        <ui-view></ui-view>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="selected">Image Gallery</a> </li>
+                    <li><a href="groups.html">Groups</a> </li>
+                    <li><a href="contact.html">Contact</a> </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+
+            <div id="wrapper">
+                <ul id="gallery">
+                    <div ng-repeat="img in imgs | orderBy: '-added'">
+                        <li>
+                            <a href= {{img.image}} >
+                                <img src= {{img.image}} alt="">
+                            </a>
+                            <h3>{{img.title}}</h3>
+
+                            <!--<span ng-show="img.link">-->
+                            <!--{{img.link}} <br>-->
+                            <!--</span>-->
+
+                            added: {{img.added}} <br>
+
+                            <button ng-click="favourite(img)"> &lt;3: {{img.favourite}} </button>
+                            <button ng-click="update(img)"> Tic/Toc </button>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+
+            <form class="image-form" ng-submit="addImg()">
+                <input type="text" placeholder="Name" ng-model="title"><br>
+                <input type="text" placeholder="Link" ng-model="link"><br>
+                <button type="submit">Add new Img</button>
+            </form>
+        </section>
+        <!--<ui-view></ui-view>-->
 
         <footer>
             <a href="http://www.twitter.com"><img class="social-icon" src="img/twitter-wrap.png" alt="Twitter logo"></a>

@@ -7,7 +7,12 @@ angular.module('img-gallery', ['ui.router'])
 					.state('home', {
 						url: '/home',
 						templateUrl: 'templates/home.html',
-						controller: 'MainCtrl'
+						controller: 'MainController'
+					})
+					.state('image', {
+						url:'/image/{id}',
+						templateUrl: 'templates/images.html',
+						controller: 'ImagesController'
 					});
 
 				$urlRouterProvider.otherwise('home');
@@ -20,10 +25,10 @@ angular.module('img-gallery', ['ui.router'])
 				var o = {
 
 					imageList: [
-						{title:'Donatello', favourite: false, link: '', added: new Date()},
-						{title:'Michelangelo', favourite: true, link: '',  added: new Date()},
-						{title:'Raphael', favourite: false, link: '',  added: new Date()},
-						{title:'Leonardo', favourite: false, link: '',  added: new Date()},
+						{title:'Red shirt', image: './img/shirt3.jpg' , favourite: false, link: '',  added: new Date()},
+						{title:'Superman shirt', image: './img/shirt.jpg' ,favourite: false, link: '', added: new Date()},
+						{title:'Jeans', image: './img/pants.jpg' , favourite: false, link: '',  added: new Date()},
+						{title:'Chinese shirt', image: './img/shirt2.jpg' , favourite: true, link: '',  added: new Date()}
 					]
 				};
 
@@ -31,7 +36,38 @@ angular.module('img-gallery', ['ui.router'])
 			}
 		]
 	)
-	.controller('MainCtrl',
+	.controller('MainController',
+		['$scope', 'imageFactory',
+			function ($scope, images) {
+
+				$scope.imgs = images.imageList;
+
+				$scope.addImg = function () {
+					if(!$scope.title || $scope.title === ''){return;}
+
+					$scope.imgs.push({
+						title: $scope.title,
+						favourite: false,
+						link: $scope.link,
+						added: new Date()
+					});
+
+					$scope.title = '';
+					$scope.link = '';
+
+				};
+
+				$scope.favourite = function (img) {
+					img.favourite = !img.favourite;
+				};
+
+				$scope.update = function (img) {
+					img.added = new Date();
+				};
+			}
+		]
+	)
+	.controller('ImagesController',
 		['$scope', 'imageFactory',
 			function ($scope, images) {
 
