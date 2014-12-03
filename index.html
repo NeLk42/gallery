@@ -3,34 +3,61 @@
 	<head lang="en">
 	    <meta charset="UTF-8">
 	    <title>Gallery</title>
+        <link href="./css/normalize.css" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 	    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 	    <script src="app.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Changa+One' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/main.css">
 
 	</head>
 	<body ng-app="img-gallery" ng-controller="MainCtrl">
+        <header>
+            <a href="index.html" id="logo">
+                <h1>My Fancy French Image Gallery</h1>
+                <h2>Image Gallery</h2>
+            </a>
 
-		<div ng-repeat="img in imgs | orderBy: '-added'">
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="selected">Image Gallery</a> </li>
+                    <li><a href="groups.html">Groups</a> </li>
+                    <li><a href="contact.html">Contact</a> </li>
+                </ul>
+            </nav>
+        </header>
+        <section>
+            <div id="wrapper">
+                <ul id="gallery">
+                    <div ng-repeat="img in imgs | orderBy: '-added'">
+                        <li>
+                            <h3>{{img.title}}</h3>
 
-			<button ng-click="favourite(img)"> &lt;3 </button>
+                        <!--<span ng-show="img.link">-->
+                            <!--{{img.link}} <br>-->
+                        <!--</span>-->
 
-			<button ng-click="update(img)"> Tic/Toc </button>
+                            added: {{img.added}} <br>
 
-            {{img.title}} - favourited: {{img.favourite}}
+                            <button ng-click="favourite(img)"> &lt;3: {{img.favourite}} </button>
+                            <button ng-click="update(img)"> Tic/Toc </button>
+                        </li>
+                    </div>
+                </ul>
+            </div>
 
-            <span ng-show="img.link">
-                {{img.link}} <br>
-            </span>
+            <form class="image-form" ng-submit="addImg()">
+                <input type="text" placeholder="Name" ng-model="title"><br>
+                <input type="text" placeholder="Link" ng-model="link"><br>
+                <button type="submit">Add new Img</button>
+            </form>
+        </section>
 
-            added: {{img.added}}
-
-		</div>
-
-        <form ng-submit="addImg()">
-            <input type="text" placeholder="Name" ng-model="title"><br>
-            <input type="text" placeholder="Link" ng-model="link"><br>
-            <button type="submit">Add new Img</button>
-        </form>
-
+        <footer>
+            <a href="http://www.twitter.com"><img class="social-icon" src="img/twitter-wrap.png" alt="Twitter logo"></a>
+            <a href="http://www.facebook.com"><img class="social-icon" src="img/facebook-wrap.png" alt="Facebook logo"></a>
+            <p>&copy; 2014 NeLk.</p>
+        </footer>
 	</body>
 </html>

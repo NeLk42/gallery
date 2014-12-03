@@ -1,15 +1,26 @@
 angular.module('img-gallery', [])
-	.controller('MainCtrl',
-		['$scope',
-			function ($scope) {
-				$scope.test = 'Bleh';
+	.factory('imageFactory',
+		[
+			function () {
+				var o = {
 
-				$scope.imgs = [
-					{title:'Donatello', favourite: false, link: '', added: new Date()},
-					{title:'Michelangelo', favourite: true, link: '',  added: new Date()},
-					{title:'Raphael', favourite: false, link: '',  added: new Date()},
-					{title:'Leonardo', favourite: false, link: '',  added: new Date()},
-				];
+					imageList: [
+						{title:'Donatello', favourite: false, link: '', added: new Date()},
+						{title:'Michelangelo', favourite: true, link: '',  added: new Date()},
+						{title:'Raphael', favourite: false, link: '',  added: new Date()},
+						{title:'Leonardo', favourite: false, link: '',  added: new Date()},
+					]
+				};
+
+				return o;
+			}
+		]
+	)
+	.controller('MainCtrl',
+		['$scope', 'imageFactory',
+			function ($scope, images) {
+
+				$scope.imgs = images.imageList;
 
 				$scope.addImg = function () {
 					if(!$scope.title || $scope.title === ''){return;}
@@ -28,11 +39,11 @@ angular.module('img-gallery', [])
 
 				$scope.favourite = function (img) {
 					img.favourite = !img.favourite;
-				}
+				};
 
 				$scope.update = function (img) {
 					img.added = new Date();
-				}
+				};
 			}
 		]
 	);
