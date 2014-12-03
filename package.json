@@ -1,0 +1,27 @@
+{
+  "name": "gallery",
+  "version": "1.0.0",
+  "description": "Tag-Gallery[![Build Status](https://travis-ci.org/NeLk42/gallery.svg?branch=master)](https://travis-ci.org/NeLk42/gallery) =========== A 'code for fun' SPA Taggable gallery using NodeJS, AngularJS and MongoDB, backed by Travis CI",
+  "main": "server.js",
+  "scripts": {
+    "test": "jasmine-node e2e/calc-spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NeLk42/gallery.git"
+  },
+  "keywords": [
+    "nodejs",
+    "angularjs",
+    "mongodb"
+  ],
+  "author": "Ramon Antunez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NeLk42/gallery/issues"
+  },
+  "homepage": "https://github.com/NeLk42/gallery",
+  "dependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
