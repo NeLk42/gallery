@@ -30,7 +30,7 @@ angular.module('img-gallery', [
 
 					imageList: [
 						{title:'Chinese shirt', image: './img/shirt2.jpg' , favourite: false, link: '',  added: new Date(),
-							worn: [], category: 'Shirt', colors: ['black', 'yellow'], price: 50, seasons: ['winter', 'fall']},
+							worn: [], category: 'Shirt', colors: ['black', 'yellow'], price: 39, seasons: ['winter', 'fall']},
 						{title:'Jeans', image: './img/pants.jpg' , favourite: true, link: '',  added: new Date(),
 							worn: [], category: 'Pants', colors: ['blue'], price: 50, seasons: ['any']},
 						{title:'Superman shirt', image: './img/shirt.jpg' ,favourite: true, link: '', added: new Date(),
@@ -72,6 +72,7 @@ angular.module('img-gallery', [
 
 				$scope.favourite = function (img) {
 					img.favourite = !img.favourite;
+
 				};
 
 				$scope.update = function (img) {

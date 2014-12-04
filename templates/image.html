@@ -20,11 +20,19 @@
                 <img src= {{img.image}} alt="">
             </a>
 
+
+
+            <img ng-show="{{img.favourite}}" class="heart" src="./img/heart.png">
+            <img ng-hide="{{img.favourite}}" class="grey-heart" src="./img/heart.png">
+
+
+
+
             <button ng-class="!{{img.favourite}} && 'btn-warning'
                                         || {{img.favourite}} && 'btn-danger'"
                     ng-click="favourite(img)"> &lt;3: {{img.favourite}} </button>
 
-            <!--<img class="heart" src="../img/heart.png" ng-click="favourite(img)"> &lt;3: {{img.favourite}} </img>-->
+
             <button ng-click="update(img)"> Using it Today </button>
             <h3>{{img.title}}</h3>
 
@@ -34,21 +42,25 @@
 
             added: {{img.added}}
             <br>
+
             Price: {{img.price | currency : '£' : 2}}
             <br>
-            Seasons :   <span ng-repeat="season in img.seasons">
-                            {{season}}
-                        </span>
-
-            <br>
-            Times worn -  <span ng-repeat="woreIt in img.worn">
-                                    {{woreIt}}
-                                </span>
+            Seasons :
+            <span ng-repeat="season in img.seasons">
+                {{season}}
+            </span>
             <br>
 
-            {{img.category}} -  <span ng-repeat="color in img.colors">
-                                    {{color}}
-                                </span>
+            Times worn -
+            <span ng-repeat="woreIt in img.worn">
+                {{woreIt}}
+            </span>
+            <br>
+
+            {{img.category}} -
+            <span ng-repeat="color in img.colors">
+                {{color}}
+            </span>
             <br>
 
         </div>

@@ -1,12 +1,12 @@
 angular.module('directives', [])
-    .directive('navigatHome',
+    .directive('navigateHome',
         ['$window',
             function($window) {
                 return {
                     restrict: 'A',
                     link: function (scope, elem, attrs) {
                         elem.bind('click', function () {
-                            $window.location.href="/";
+                            $window.location.href="index.html";
                         })
                     }
                 }
