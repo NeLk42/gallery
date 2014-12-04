@@ -13,22 +13,30 @@
     </nav>
 </header>
 <section>
+
     <div id="wrapper">
         <ul id="gallery">
-            <div ng-repeat="img in imgs | orderBy: '-added'">
+
+            <!--<div ng-repeat="img in imgs | orderBy: '-added'">-->
+
+            <div ng-repeat="img in imgs">
                 <li>
-                    <h3>{{img.title}}</h3>
-                    <a href="numbers-01.jpg">
-                        <img src="../img/numbers-01.jpg" alt="">
+                    <a href= "#/images/{{$index}}">
+                        <img src= {{img.image}} alt="">
+                        <h3>{{img.title}}</h3>
                     </a>
+
                     <!--<span ng-show="img.link">-->
                     <!--{{img.link}} <br>-->
                     <!--</span>-->
 
                     added: {{img.added}} <br>
 
-                    <button ng-click="favourite(img)"> &lt;3: {{img.favourite}} </button>
-                    <button ng-click="update(img)"> Tic/Toc </button>
+                    <button ng-class="!{{img.favourite}} && 'btn-warning'
+                                        || {{img.favourite}} && 'btn-danger'"
+                            ng-click="favourite(img)"> &lt;3: {{img.favourite}} </button>
+
+                    <button ng-click="update(img)"> Using it Today </button>
                 </li>
             </div>
         </ul>

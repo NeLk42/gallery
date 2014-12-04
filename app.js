@@ -1,4 +1,8 @@
-angular.module('img-gallery', ['ui.router'])
+angular.module('img-gallery', [
+		'ui.router',
+		'directives'
+		]
+	)
 	.config(
 		['$stateProvider', '$urlRouterProvider',
 			function($stateProvider, $urlRouterProvider) {
@@ -9,9 +13,9 @@ angular.module('img-gallery', ['ui.router'])
 						templateUrl: 'templates/home.html',
 						controller: 'MainController'
 					})
-					.state('image', {
-						url:'/image/{id}',
-						templateUrl: 'templates/images.html',
+					.state('images', {
+						url:'/images/{id}',
+						templateUrl: 'templates/image.html',
 						controller: 'ImagesController'
 					});
 
@@ -25,10 +29,14 @@ angular.module('img-gallery', ['ui.router'])
 				var o = {
 
 					imageList: [
-						{title:'Red shirt', image: './img/shirt3.jpg' , favourite: false, link: '',  added: new Date()},
-						{title:'Superman shirt', image: './img/shirt.jpg' ,favourite: false, link: '', added: new Date()},
-						{title:'Jeans', image: './img/pants.jpg' , favourite: false, link: '',  added: new Date()},
-						{title:'Chinese shirt', image: './img/shirt2.jpg' , favourite: true, link: '',  added: new Date()}
+						{title:'Chinese shirt', image: './img/shirt2.jpg' , favourite: false, link: '',  added: new Date(),
+							worn: [], category: 'Shirt', colors: ['black', 'yellow'], price: 50, seasons: ['winter', 'fall']},
+						{title:'Jeans', image: './img/pants.jpg' , favourite: true, link: '',  added: new Date(),
+							worn: [], category: 'Pants', colors: ['blue'], price: 50, seasons: ['any']},
+						{title:'Superman shirt', image: './img/shirt.jpg' ,favourite: true, link: '', added: new Date(),
+							worn: [], category: 'Shirt', colors: ['red', 'blue'], price: 50, seasons: ['summer']},
+						{title:'Red shirt', image: './img/shirt3.jpg' , favourite: false, link: '',  added: new Date(),
+							worn: [], category: 'Shirt', colors: ['red'], price: 50, seasons: ['summer']}
 					]
 				};
 
@@ -47,11 +55,16 @@ angular.module('img-gallery', ['ui.router'])
 
 					$scope.imgs.push({
 						title: $scope.title,
+						image: './img/boots.jpg',
 						favourite: false,
 						link: $scope.link,
-						added: new Date()
+						added: new Date(),
+						worn: [],
+						category: 'Shoes',
+						colors: ['black'],
+						price: 50,
+						seasons: ['any']
 					});
-
 					$scope.title = '';
 					$scope.link = '';
 
@@ -62,38 +75,26 @@ angular.module('img-gallery', ['ui.router'])
 				};
 
 				$scope.update = function (img) {
-					img.added = new Date();
+					img.worn.push(new Date());
 				};
 			}
 		]
 	)
 	.controller('ImagesController',
-		['$scope', 'imageFactory',
-			function ($scope, images) {
+		['$scope', '$stateParams', 'imageFactory',
+			function ($scope, $stateParams, images) {
 
-				$scope.imgs = images.imageList;
+				$scope.img = images.imageList[$stateParams.id];
 
-				$scope.addImg = function () {
-					if(!$scope.title || $scope.title === ''){return;}
 
-					$scope.imgs.push({
-						title: $scope.title,
-						favourite: false,
-						link: $scope.link,
-						added: new Date()
-					});
 
-					$scope.title = '';
-					$scope.link = '';
-
-				};
 
 				$scope.favourite = function (img) {
 					img.favourite = !img.favourite;
 				};
 
 				$scope.update = function (img) {
-					img.added = new Date();
+					img.worn.push(new Date());
 				};
 			}
 		]
